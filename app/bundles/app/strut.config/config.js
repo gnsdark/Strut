@@ -12,7 +12,7 @@ define(function () {
 		}
 	};
 
-	var temp = localStorage.getItem("Strut_sessionMeta");
+	var temp = localStorage.getItem("910_Editor_sessionMeta");
 	try {
 		var sessionMeta = JSON.parse(temp);
 	} catch (e) {

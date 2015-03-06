@@ -25,8 +25,8 @@
 </div>
 
 <div class="fallback-message">
-    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
-    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+    <p>{{fallback-message}}</p>
+    <p>{{fallback-help}}</p>
 </div>
 
 <div class="bg {{#isBGClass surface}}{{surface}} {{/isBGClass}}strut-surface">
@@ -50,7 +50,7 @@
 	{{/attributes}}
 </div>
 <div class="hint">
-    <p>Use a spacebar or arrow keys to navigate</p>
+    <p>{{start-hint}}</p>
 </div>
 </div>
 </div>

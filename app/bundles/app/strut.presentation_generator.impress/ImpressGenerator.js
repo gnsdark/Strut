@@ -1,5 +1,5 @@
-define(["handlebars", "common/Math2", "marked", "strut/deck/Utils"],
-function(Handlebars, Math2, marked, DeckUtils) {
+define(["handlebars", "common/Math2", "marked", "strut/deck/Utils","lang"],
+function(Handlebars, Math2, marked, DeckUtils,lang) {
 	var ImpressGenerator;
 	var slideConfig = window.config.slide;
 
@@ -190,6 +190,9 @@ function(Handlebars, Math2, marked, DeckUtils) {
 			deckAttrs.overviewX = (maxX + minX) / 2;
 			deckAttrs.overviewY = (maxY + minY) / 2;
 
+			deck["fallback-message"] = lang["fallback-message"]||"Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.",
+			deck["fallback-help"] = lang["fallback-help"]||"For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.",
+			deck["start-hint"] = lang["start-hint"]||"Use a spacebar or arrow keys to navigate"
 			return JST["strut.presentation_generator.impress/ImpressTemplate"](deck);
 		};
 

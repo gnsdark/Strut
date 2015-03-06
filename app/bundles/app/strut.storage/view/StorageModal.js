@@ -1,5 +1,5 @@
-define(['libs/backbone', 'tantaman/web/widgets/FileBrowser', 'css!styles/storage/storageModal.css'],
-function(Backbone, FileBrowser) {
+define(['libs/backbone', 'tantaman/web/widgets/FileBrowser','lang', 'css!styles/storage/storageModal.css'],
+function(Backbone, FileBrowser,lang) {
 	return Backbone.View.extend({
 		className: "storageModal modal hide",
 		events: {
@@ -36,8 +36,10 @@ function(Backbone, FileBrowser) {
 
 			// Don't load the data for a provider until its tab is selected...
 			var providerNames = this.storageInterface.providerNames();
+			_.map(providerNames,function(item){item.name = lang[item.id] || item.name});
 			this.$el.html(this.template({
 				title: this.__title(),
+				submit:lang.submit||"Ok",
 				tabs: providerNames
 			}));
 

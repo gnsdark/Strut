@@ -1,16 +1,18 @@
 define(['libs/backbone',
 		'strut/logo_button/LogoView',
+		'strut/document/view/DocumentButton',
 		'strut/presentation_generator/view/PreviewButton',
 		'./ThemeProviderView',
 		'./Tablets',
 		'css!styles/header/header.css'],
-function(Backbone, LogoView, PreviewButton, ThemeProviderView, Tablets, empty) {
+function(Backbone, LogoView, DocumentButton, PreviewButton, ThemeProviderView, Tablets, empty) {
 	return Backbone.View.extend({
 		className: 'row-fluid header',
 
 		initialize: function() {
 			this._template = JST['strut.header/Header'];
 			this._logoButton = new LogoView({editorModel: this.model.editorModel()});
+			this._document = new DocumentButton({editorModel: this.model.editorModel()});
 			this._previewButton = 
 				new PreviewButton({editorModel: this.model.editorModel()});
 			this._themeProviderView = new ThemeProviderView(this.model.editorModel());
@@ -34,6 +36,8 @@ function(Backbone, LogoView, PreviewButton, ThemeProviderView, Tablets, empty) {
 			this.$el.html(this._template());
 
 			this.$el.find('.logo-holder').append(this._logoButton.render().$el);
+			var $documentButtons = this.$el.find('.document-buttons');
+			$documentButtons.append(this._document.render().el);
 
 			var $modeButtons = this.$el.find('.mode-buttons');
 			this.model.get('modeButtons').forEach(function(button) {

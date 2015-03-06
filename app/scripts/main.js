@@ -36,6 +36,7 @@ require.config({
     	'strut/importer/json': '../bundles/app/strut.importer.json',
     	'strut/presentation_generator/impress': '../bundles/app/strut.presentation_generator.impress',
     	'strut/logo_button': '../bundles/app/strut.logo_button',
+    	'strut/document': '../bundles/app/strut.document',
     	'strut/presentation_generator': '../bundles/app/strut.presentation_generator',
     	'strut/slide_components': '../bundles/app/strut.slide_components',
     	'strut/slide_editor': '../bundles/app/strut.slide_editor',
@@ -238,6 +239,6 @@ require([
 		});
 
 		$(window).unload(function() {
-			localStorage.setItem('Strut_sessionMeta', JSON.stringify(window.sessionMeta));
+			localStorage.setItem('910_Editor_sessionMeta', JSON.stringify(window.sessionMeta));
 		});
 	});

@@ -1,5 +1,5 @@
-define(['libs/backbone', '../PreviewLauncher'],
-function(Backbone, PreviewLauncher) {
+define(['libs/backbone', '../PreviewLauncher','lang'],
+function(Backbone, PreviewLauncher,lang) {
 	return Backbone.View.extend({
 		className: 'btn-group iconBtns',
 		events: {
@@ -13,7 +13,7 @@ function(Backbone, PreviewLauncher) {
 				.getBest('strut.presentation_generator.GeneratorCollection');
 			//publish
 			this._generators.push({
-				displayName: '发布',
+				displayName: lang.publish||'Send To Server',
 				id: 'publish'
 			});
 			delete this.options.editorModel;

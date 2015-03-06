@@ -6,6 +6,8 @@
 			<li class="divider-vertical">
 			</li>
 		</ul>
+		<ul class="nav document-buttons">
+		</ul>
 		<ul class="nav">
 			<li class="create-comp-buttons">
 				<div class="btn-group iconBtns">

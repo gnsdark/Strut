@@ -25,13 +25,14 @@ define({
 	undo: '撤销',
 	redo: '重做',
 	shapes: '形状',
-	single_slide_bg: 'Single Slide Background',
-	invisible: 'Invisible',
-	reset: 'Reset',
+	single_slide_bg: '单页背景',
+	invisible: '不显示',
+	reset: '重置',
 	go: 'Go',
+	publish:"发布",
 	strut_exporter_json: {
-		explain: 'This allows you to save a file on your computer that you can import back into Strut later.',
-		click_below: 'Click below to download'
+		explain: '你可以保存设计文件在你的电脑中，在你需要时可通过导入导入到设计器中。',
+		click_below: '点击下面的下载图标'
 	},
 	background: '主体背景',
 	surface: '页面背景',
@@ -71,5 +72,20 @@ define({
 	modal_browser:"浏览",
 	modal_video_title:"请将视频上传到国内视频网址并获取分享地址，填入到网址中即可",
 	
+	"fallback-message":"你的浏览器不支持查看本文档，部分内容的显示可能出现问题",
+	"fallback-help":"为呈现更好的显示效果，请使用最新版本的浏览器。",
+	"start-hint":"用空格或者方向键导航",
+
+	"document_btn":"文档信息",
+	"document_header":"文档信息",
+	"document_title":"文档标题",
+	"document_title_holder":"请填入文档标题",
+	"document_keywords":"关键字",
+	"document_keywords_holder":"请填写文档的相关关键字以\",\"号分隔",
+	"document_describe":"文档简介",
+	"document_describe_holder":"请用简单的语句描述文档的基本信息",
+	"document_image":"文档图标",
+
+	"localstorage":"本地存储",
 	submit:"确定"
 });
