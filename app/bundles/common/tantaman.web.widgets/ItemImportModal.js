@@ -142,6 +142,10 @@ function(Backbone, Imgup) {
 			if (this.options.tag === "video") {
 				this.$el.find(".modal-body").prepend("<div class='alert alert-success'>Supports <strong>webm & YouTube</strong>.<br/>Try out: http://www.youtube.com/watch?v=vHUsdkmr-SM</div>");
 			}
+			else if (this.options.tag == "iframe"){
+				$(this.item).attr("security","restricted");
+				$(this.item).attr("sandbox","");
+			}
 			if (!this.options.ignoreErrors) {
 				this.item.onerror = function() {
 					return _this._itemLoadError();

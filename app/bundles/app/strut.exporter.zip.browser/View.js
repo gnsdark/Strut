@@ -13,7 +13,7 @@ function(Backbone, Archiver, lang) {
 		show: function($container, $modal) {
 			this._$modal = $modal;
 			var $ok = this._$modal.find('.ok');
-			//this._makeDownloadable($ok);
+			this._makeDownloadable($ok);
 
 			$ok.html('');
 			$container.append(this.$el);

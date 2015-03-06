@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1024" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>{$Title}</title>
+<meta name="description" content="{$Description}" />
+<meta name="keywords" content="{$Keywords}" />
+<meta name="author" content="www.laoshi910.com" />
+<link rel="stylesheet" href="http://cdn.laoshi910.com/strut/output/impress.css"></link>
+<link rel="icon" href="http://cdn.laoshi910.com/strut/output/favicon.png" type='image/png' />
+<link rel="apple-touch-icon" sizes="96x96" href="http://cdn.laoshi910.com/strut/output/apple-touch-icon-96.png" />
+<script type="text/javascript" src="http://cdn.laoshi910.com/strut/output/dataset-shim.js"></script>
+<script type="text/javascript" src="http://cdn.laoshi910.com/strut/output/impress.js"></script>
+</head>
+<body class="impress-not-supported"><div id="launched-placeholder">{$HTML}</div></body>
+<script type="text/javascript">
+	var ready = function() {
+		startPres(document, window);
+		impress().init();
+		if ("ontouchstart" in document.documentElement) {
+			document.querySelector(".hint").innerHTML = "<p>滑动开始</p>";
+		}
+	};
+	if (document.addEventListener) {
+		window.addEventListener("load", ready, false);
+	} else if (document.attachEvent) {
+		window.attachEvent("onload", ready);
+	}
+</script>
+</html>

@@ -11,7 +11,11 @@ function(Backbone, PreviewLauncher) {
 			this._previewLauncher = new PreviewLauncher(this._editorModel);
 			this._generators = this._editorModel.registry
 				.getBest('strut.presentation_generator.GeneratorCollection');
-
+			//publish
+			this._generators.push({
+				displayName: '发布',
+				id: 'publish'
+			});
 			delete this.options.editorModel;
 			// TODO: we should keep session meta per bundle...
 			this._index = Math.min(window.sessionMeta.generator_index || 0, this._generators.length - 1);
@@ -29,6 +33,12 @@ function(Backbone, PreviewLauncher) {
 			this.$el.find('li').each(function(i) {
 				var $btn = $(this);
 				$btn.click(function(e) {
+					if($btn.attr('data-option') == 'publish'){
+						self._previewLauncher.publish(self._generators[self._index]);
+						self.$el.find('.dropdown-toggle').dropdown('toggle');
+						e.stopPropagation();
+						return;
+					}
 					// self._previewLauncher.launch(self._generators[i]);
 					self.$el.find('.check').css('visibility', 'hidden');
 					$btn.find('.check').css('visibility', '');

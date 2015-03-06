@@ -20,6 +20,7 @@ function(RevealGenerator) {
 
 	return {
 		initialize: function(registry) {
+			
 			registry.register({
 				interfaces: 'strut.presentation_generator'
 			}, service);

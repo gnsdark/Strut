@@ -49,7 +49,7 @@
         this.previewExportDir = this.archive.folder("preview_export");
         this.scriptsDir = this.previewExportDir.folder("scripts");
         this.cssDir = this.previewExportDir.folder("css");
-        showStr = "<!doctype html><html>" + ImpressRenderer.render(this.presentation.attributes) + "</html>";
+        showStr = "<!doctype html><html>" + ImpressRenderer.render(this.presentation) + "</html>";
         this._archiveIndexHtml(showStr);
         return this._archiveScripts(function() {
           return _this._archiveCss(function() {

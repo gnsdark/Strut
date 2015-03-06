@@ -12,9 +12,9 @@
 	<input type="file" style="display:none"></input>
 	<h4>Preview:</h4>
 	<ul class="thumbnails">
-		<li class="span4">
+		<li class="">
 			<div class="thumbnail">
-				<{{tag}} class="preview" width="360" height"268"></{{tag}}>
+				<{{tag}} class="preview" width="360" height="268"></{{tag}}>
 			</div>
 			<div class="progress active progress-striped dispNone">
   				<div class="bar"></div>

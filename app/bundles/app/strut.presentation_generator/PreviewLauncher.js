@@ -24,6 +24,9 @@ define(function() {
 				'preview_export/' + generator.id + '.html' + generator.getSlideHash(this._editorModel),
 				window.location.href);
 			var sourceWind = window;
+		},
+		publish:function(generator){
+			console.info('publish',generator.generate(this._editorModel.deck()));
 		}
 	};
 

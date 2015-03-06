@@ -3,7 +3,7 @@ function(ImpressGenerator) {
 	'use strict';
 
 	var service = {
-		displayName: 'Impress',
+		displayName: '查看预览',
 		id: 'impress',
 		capabilities: {
 			freeformStepping: true
