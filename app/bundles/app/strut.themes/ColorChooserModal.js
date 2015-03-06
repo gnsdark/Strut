@@ -1,5 +1,5 @@
-define(['libs/backbone'],
-function(Backbone) {
+define(['libs/backbone','lang'],
+function(Backbone,lang) {
 	/**
 	* A modal that present a flat color chooser.
 	*/
@@ -36,7 +36,10 @@ function(Backbone) {
 
 		render: function() {
 			var self = this;
-			this.$el.html(JST['strut.themes/ColorChooserModal']());
+			this.$el.html(JST['strut.themes/ColorChooserModal']({
+				title:lang.chooser_color||"Custom Color",
+				submit:lang.submit||"Ok"
+			}));
 			this._$body = this.$el.find('.modal-body');
 			this._$colorChooser = this.$el.find('.color-chooser');
 			this._$colorChooser.spectrum({

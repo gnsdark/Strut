@@ -1,4 +1,4 @@
-define(function() {
+define(['lang'],function(lang) {
 	var Add, Remove, Move;
 
 	/**
@@ -14,7 +14,7 @@ define(function() {
 		this.start = initial;
 		this.end = component.get(attr) || 0;
 		this.component = component;
-		this.name = name;
+		this.name = lang['edit_'+attr]||name;
 		this.attr = attr;
 	}
 
@@ -57,7 +57,7 @@ define(function() {
 			this.slide.set('active', true);
 			this.slide.__doRemove(this.components);
 		},
-		name: "Add Comp"
+		name: lang.add_comp||"Add Comp"
 	};
 
 	/**
@@ -81,7 +81,7 @@ define(function() {
 			this.slide.set('active', true);
 			this.slide.__doAdd(this.components);
 		},
-		name: "Remove Comp"
+		name: lang.remove_comp||"Remove Comp"
 	};
 
 
@@ -116,7 +116,7 @@ define(function() {
 			this.component.set(this.startLoc);
 			this.component.set('selected', true);
 		},
-		name: "Move"
+		name: lang.move_comp||"Move"
 	};
 
 	return {

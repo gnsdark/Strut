@@ -4,6 +4,7 @@ define({
 	insert_website: '插入网页',
 	add_slide: '增加页',
 	remove_slide: '删除页',
+	move_slide:'移动页',
 	slides: '单页设计',
 	overview: '目录设计',
 	open: '打开',
@@ -33,5 +34,42 @@ define({
 		click_below: 'Click below to download'
 	},
 	background: '主体背景',
-	surface: '页面背景'
+	surface: '页面背景',
+	add_comp:"增加元素",
+	remove_comp:"删除元素",
+	move_comp:"移动元素",
+
+	edit_rotate:"旋转",
+	edit_scale:"缩放",
+	edit_size:"尺寸变化",
+	edit_text:"文本修改",
+	edit_skewX:"X倾斜",
+	edit_skewY:"Y倾斜",
+
+	move_slide_transition:"页过渡",
+	move_component:"移动组件",
+
+	all_slides:"所有页",
+	select_slides:"当前选择页",
+	chooser_color:"选择颜色",
+
+	"bold":"粗体",
+	"italic":"斜体",
+	"unordered-list":"无序列表",
+	"ordered-list":"有序列表",
+	"justify-left":"左对齐", 
+	"justify-center":"居中对齐",
+	"link":"超链接", 
+	"font-family":"字体",
+	"font-size":"尺寸",
+	"color":"颜色",
+	"clear-formatting":"清除格式",
+
+	modal_url:"网址",
+	modal_preview:"预览",
+	modal_url_error:"无效的网址，请输入有效的格式",
+	modal_browser:"浏览",
+	modal_video_title:"请将视频上传到国内视频网址并获取分享地址，填入到网址中即可",
+	
+	submit:"确定"
 });

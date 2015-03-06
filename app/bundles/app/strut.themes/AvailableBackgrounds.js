@@ -1,8 +1,9 @@
-define(['css!styles/strut.themes/backgroundClasses.css'], function() {
+define(['css!styles/strut.themes/backgroundClasses.css','lang'], function(css,lang) {
 	return {
 	title: 'background',
+	subtitle_all:lang.all_slides||'All Slides',
+	subtitle_select:lang.select_slides||'Selected Slide',
 	backgrounds: [
-	// TODO: translate descriptions
 		{klass: 'bg-solid-black', description: 'Black'},
 		{klass: 'bg-solid-light', description: 'Light'},
 		{klass: 'bg-solid-smoke', description: 'Smoke'},

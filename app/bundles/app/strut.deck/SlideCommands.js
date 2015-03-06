@@ -1,7 +1,7 @@
 /**
  * @class SlideCommands
  */
-define(['strut/deck/Slide'], function(Slide) {
+define(['strut/deck/Slide','lang'], function(Slide,lang) {
 	var Add, Remove, Move;
 
 	/**
@@ -20,7 +20,7 @@ define(['strut/deck/Slide'], function(Slide) {
 	};
 
 	Add.prototype = {
-		name: 'Add Slide',
+		name: lang.add_slide||'Add Slide',
 
 		"do": function() {
 			this.deck._doAdd(this.slides, {preserveIndexes: false, at: this.index});
@@ -43,7 +43,7 @@ define(['strut/deck/Slide'], function(Slide) {
 	};
 
 	Remove.prototype = {
-		name: "Remove Slide",
+		name: lang.remove_slide||"Remove Slide",
 
 		"do": function() {
 			this.deck._doRemove(this.slides);
@@ -93,7 +93,7 @@ define(['strut/deck/Slide'], function(Slide) {
 
 			this.deck.trigger('slideMoved');
 		},
-		name: "Move Slide"
+		name: lang.move_slide|| "Move Slide"
 	};
 
 	return {

@@ -1,8 +1,8 @@
 /*
 @author Matt Crinklaw-Vogt
 */
-define(['libs/backbone', 'libs/imgup'],
-function(Backbone, Imgup) {
+define(['libs/backbone', 'libs/imgup','lang'],
+function(Backbone, Imgup,lang) {
 	var modalCache = {};
 	var reg = /[a-z]+:/;
 	var imgup = new Imgup('847de02274cba30');
@@ -135,12 +135,16 @@ function(Backbone, Imgup) {
 		},
 		render: function() {
 			var _this = this;
+			this.options.modal_url = lang.modal_url||"URL";
+			this.options.modal_preview = lang.modal_preview||"Preview";
+			this.options.modal_url_error = lang.modal_url_error||"The image URL you entered appears to be incorrect";
+			this.options.modal_browser = lang.modal_browser||"Browse";
 			this.$el.html(JST["tantaman.web.widgets/ItemImportModal"](this.options));
 			this.$el.modal();
 			this.$el.modal("hide");
 			this.item = this.$el.find(this.options.tag)[0];
 			if (this.options.tag === "video") {
-				this.$el.find(".modal-body").prepend("<div class='alert alert-success'>Supports <strong>webm & YouTube</strong>.<br/>Try out: http://www.youtube.com/watch?v=vHUsdkmr-SM</div>");
+				this.$el.find(".modal-body").prepend("<div class='alert alert-success'>"+lang.modal_video_title||"Supports <strong>webm</strong>.<br/>Try out: http://www.youtube.com..."+"</div>");
 			}
 			else if (this.options.tag == "iframe"){
 				$(this.item).attr("security","restricted");

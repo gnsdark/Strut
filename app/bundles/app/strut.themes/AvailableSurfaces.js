@@ -1,6 +1,8 @@
-define(['css!styles/strut.themes/surfaceClasses.css'], function() {
+define(['css!styles/strut.themes/surfaceClasses.css','lang'], function(css,lang) {
 	return {
 		title: 'surface',
+		subtitle_all:lang.all_slides||'All Slides',
+		subtitle_select:lang.select_slides||'Selected Slide',
 		backgrounds: [
 			{klass: 'bg-surf-grad-black'},
 			{klass: 'bg-surf-grad-light'},

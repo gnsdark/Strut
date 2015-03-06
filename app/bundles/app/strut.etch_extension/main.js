@@ -1,5 +1,5 @@
-define(['libs/etch', 'css!styles/etch_extension/EtchOverrides.css'],
-function(etch) {
+define(['libs/etch', 'css!styles/etch_extension/EtchOverrides.css','lang'],
+function(etch,css,lang) {
     'use strict';
     _.extend(etch.config.buttonClasses, {
         default: [
@@ -22,7 +22,7 @@ function(etch) {
     etch.buttonElFactory = function(button) {
         var viewData = {
             button: button,
-            title: button.replace('-', ' '),
+            title: lang[button]||button.replace('-', ' '),
             display: button.substring(0, 1).toUpperCase()
         };
 
@@ -31,10 +31,13 @@ function(etch) {
 
         switch (button) {
             case 'font-size':
+                viewData.title = viewData.title == 'font'?'Choose the font size':viewData.title;
                 return JST['strut.etch_extension/fontSizeSelection'](viewData);
             case 'font-family':
+                viewData.title = viewData.title == 'font'?'Choose the font family':viewData.title;
                 return JST['strut.etch_extension/fontFamilySelection'](viewData);
             case 'color':
+                viewData.title = viewData.title == 'color'?'Choose Color':viewData.title;
                 return JST['strut.etch_extension/colorChooser'](viewData);
             default:
                 if (button.indexOf('justify') !== -1) {

@@ -1,8 +1,9 @@
 <div class="btn-group">
-	<button class="btn btn-inverse dropdown-toggle btn-small fontFamilyBtn" data-toggle="dropdown" title="Choose the font family"><span class="text">Lato</span><span class="caret"></span></button>
+	<button class="btn btn-inverse dropdown-toggle btn-small fontFamilyBtn" data-toggle="dropdown" title="{{title}}"><span class="text">Lato</span><span class="caret"></span></button>
 	<ul class="dropdown-menu menuBarOption" data-option="fontFamily">
 		<li>
                   <a class="lato" href="#" data-value="'Lato', sans-serif">Lato</a>
+                  <a class="msyh" href="#" data-value="'Microsoft YaHei', sans-serif">微软雅黑</a>
                   <a class="leaguegothic" href="#" data-value="'League Gothic', sans-serif">League Gothic</a>
                   <a class="droidsansmono" href="#" data-value="'Droid Sans Mono', monospace">Droid Sans Mono</a>
                   <a class="ubuntu" href="#" data-value="'Ubuntu', sans-serif">Ubuntu</a>

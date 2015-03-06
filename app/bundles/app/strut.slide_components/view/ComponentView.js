@@ -5,8 +5,8 @@ define(["libs/backbone",
 	"strut/editor/GlobalEvents",
 	"strut/deck/ComponentCommands",
 	"tantaman/web/undo_support/CmdListFactory",
-	"tantaman/web/interactions/TouchBridge"],
-	function(Backbone, DeltaDragControl, Math2, empty, key, ComponentCommands, CmdListFactory, TouchBridge) {
+	"tantaman/web/interactions/TouchBridge",'lang'],
+	function(Backbone, DeltaDragControl, Math2, empty, key, ComponentCommands, CmdListFactory, TouchBridge,lang) {
 		var undoHistory = CmdListFactory.managedInstance('editor');
 
 		/**
@@ -257,13 +257,13 @@ define(["libs/backbone",
 						_this.model.slide.selected.forEach(function(component) {
 							component.trigger('dragStop', e);
 						});
-					}, 'Move Components');
+					},  lang.move_component||'Move Components');
 				} else {
 					undoHistory.record(function(){
 						_this.options.deck.selected.forEach(function(component) {
 							component.trigger('dragStop', e);
 						});
-					}, 'Move Slide Transition');
+					}, lang.move_slide_transition||'Move Slide Transition');
 				}
 			},
 
