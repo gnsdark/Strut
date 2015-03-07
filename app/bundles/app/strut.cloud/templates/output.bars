@@ -3,9 +3,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=1024" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<title>{$Title}</title>
-<meta name="description" content="{$Description}" />
-<meta name="keywords" content="{$Keywords}" />
+<title>{{Title}}</title>
+<meta name="description" content="{{Description}}" />
+<meta name="keywords" content="{{Keywords}}" />
 <meta name="author" content="www.laoshi910.com" />
 <link rel="stylesheet" href="http://cdn.laoshi910.com/strut/output/impress.css"></link>
 <link rel="icon" href="http://cdn.laoshi910.com/strut/output/favicon.png" type='image/png' />
@@ -13,7 +13,7 @@
 <script type="text/javascript" src="http://cdn.laoshi910.com/strut/output/dataset-shim.js"></script>
 <script type="text/javascript" src="http://cdn.laoshi910.com/strut/output/impress.js"></script>
 </head>
-<body class="impress-not-supported"><div id="launched-placeholder">{$HTML}</div></body>
+<body class="impress-not-supported"><div id="launched-placeholder">{{{HTML}}}</div></body>
 <script type="text/javascript">
 	var ready = function() {
 		startPres(document, window);

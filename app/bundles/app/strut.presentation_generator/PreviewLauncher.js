@@ -1,4 +1,4 @@
-define(function() {
+define(["strut/cloud/main","strut/cloud/view/ErrorDialog","lang"],function(cloud,ErrorDialog,lang) {
 	'use strict';
 	var launch = 0;
 
@@ -26,7 +26,14 @@ define(function() {
 			var sourceWind = window;
 		},
 		publish:function(generator){
-			console.info('publish',generator.generate(this._editorModel.deck()));
+			var doc = this._editorModel;
+			cloud.getInfo(function(err,info){
+				if(err){
+					return ErrorDialog.open(lang.error_title||"Error",err);
+				}
+				cloud.publish(info,doc,generator);
+			});
+			//console.info('publish',generator.generate(doc));
 		}
 	};
 

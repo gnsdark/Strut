@@ -117,7 +117,11 @@ define(["common/Calcium",
 				activeSlide = this.get("activeSlide");
 				if (activeSlide !== undefined) {
 					activeSlide.unselectComponents();
-				}
+				};
+				this.set("document_title",rawObj.document_title||"");
+				this.set("document_keywords",rawObj.document_keywords||"");
+				this.set("document_describe",rawObj.document_describe||"");
+				this.set("document_image",rawObj.document_image||"");
 				this.set("activeSlide", undefined);
 				this.set("background", rawObj.background);
 				this.set("fileName", rawObj.fileName);

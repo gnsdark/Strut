@@ -1,6 +1,7 @@
 define(['strut/editor/EditorView',
-        'strut/editor/EditorModel'],
-function(EditorView, EditorModel) {
+        'strut/editor/EditorModel',
+        'strut/cloud/main'],
+function(EditorView, EditorModel,cloud) {
 	var registry = null;
 	var editorStartup = {
 		run: function() {
@@ -27,6 +28,12 @@ function(EditorView, EditorModel) {
 	var welcome = {
 		run: function() {
 			// If no previous presentation was detected, show the welcome screen.
+			var loca = window.location;
+			if(loca.hash && loca.hash.indexOf("#session") > -1){
+				var params = loca.hash.split('/');
+				params.shift();
+				cloud.load(loca,params);
+			}
 		}
 	};
 

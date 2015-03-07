@@ -85,7 +85,25 @@ define({
 	"document_describe":"文档简介",
 	"document_describe_holder":"请用简单的语句描述文档的基本信息",
 	"document_image":"文档图标",
+	"document_null":"文档信息为空，请先填写文档信息",
+	"document_upload":"发布到老师910",
+	"document_channel":"发布频道",
+	"document_date":"发布日期",
 
 	"localstorage":"本地存储",
-	submit:"确定"
+
+	"login_title":"登录910发布平台",
+	"login_info":"发布内容需要登录910发布平台，现在就去登录吗？",
+
+	error_title:"提示",
+	error:{
+		"1005":"用户授权错误!",
+		"1000":"服务调用失败，请检查网络状态！",
+		"1002":"用户会话读取错误!"
+	},
+	year:'年',
+	month:'月',
+	day:'日',
+	submit:"确定",
+	cancel:"取消"
 });

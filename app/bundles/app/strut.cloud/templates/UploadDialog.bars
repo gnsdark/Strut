@@ -1,0 +1,39 @@
+<div class="modal-header">
+	<button class="close" data-dismiss="modal">×</button>
+	<h3>{{title}}</h3>
+</div>
+<div class="modal-body" style="overflow: hidden">
+	<form class="form-horizontal">
+		<div class="control-group">
+			<label class="col-xs-2 control-label" style="width:90px;text-align:left">{{document_title}}</label>
+			<div class="col-xs-10 controls" style="margin-left:100px">
+				<div name="title" class="form-control" style="width:98%"></div>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="col-xs-2 control-label" style="width:90px;text-align:left">{{document_channel}}</label>
+			<div class="col-xs-10 controls" style="margin-left:100px">
+				<div name="channel" class="form-control" style="width:98%"></div>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="col-xs-2 control-label" style="width:90px;text-align:left">{{document_date}}</label>
+			<div class="col-xs-10 controls" style="margin-left:100px">
+				<div name="date" class="form-control" style="width:98%"></div>
+			</div>
+		</div>
+	</form>
+	<div class="alert alert-error dispNone">
+  		<button class="close" data-dismiss="alert">×</button>
+  		<div name="error"></div>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="progress active progress-striped dispNone">
+	  	<div class="bar"></div>
+	</div>
+	<div  name="buttons">
+		<a href="#" class="btn btn-primary ok btn-inverse">{{submit}}</a>
+		<a href="#" class="btn btn-primary cancel btn-inverse">{{cancel}}</a>
+	</div>
+</div>
