@@ -424,6 +424,9 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 			}
 			else{
 				var doc = model.deck();
+				if(doc.get("publish") == "1"){
+					return ErrorDialog.open(lang.error_title||"Error",lang.document_ispublish||"Document is publish.");
+				}
 				if(!doc.get("document_title")){
 					return ErrorDialog.open(lang.error_title||"Error",lang.document_null||"Document into is null.");
 				}
@@ -500,6 +503,7 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 								if (r.status) {
 									cb(lang.error&&lang.error[r.status]||"读取源数据失败");
 								} else {
+									doc.set("publish","1");
 									cb(null,r.success);
 								}
 							}

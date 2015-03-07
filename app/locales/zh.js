@@ -89,6 +89,7 @@ define({
 	"document_upload":"发布到老师910",
 	"document_channel":"发布频道",
 	"document_date":"发布日期",
+	"document_ispublish":"当前文档已经发布过，不能再次发布",
 
 	"localstorage":"本地存储",
 
