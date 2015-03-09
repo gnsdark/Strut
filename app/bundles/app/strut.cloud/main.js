@@ -331,7 +331,8 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 			},  {
 				createMenuItems: function(editorModel) {
 					var menuItems = [];
-					if(online){
+					var session = window.sessionStorage;
+					if(session.getItem('userkey')){
 						menuItems.push({
 							$el: $('<li class="divider"></li>'),
 							render: function() { return this; }
