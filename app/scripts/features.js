@@ -17,7 +17,8 @@ define([
 	'strut/slide_components/main',
 	'strut/well_context_buttons/main',
 	'tantaman/web/local_storage/main',
-	'strut/startup/main'
+	'strut/startup/main',
+	'strut/cloud/main'
 	],
 function(ServiceRegistry) {
 	var registry = new ServiceRegistry();

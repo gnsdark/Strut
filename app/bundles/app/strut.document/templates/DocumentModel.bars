@@ -28,8 +28,10 @@
 				<div class="form-inline">
 					<input name="image" type="text">&nbsp;<div data-option="browse" class="btn">{{modal_browser}}</div><input type="file" style="display:none"></input>
 				</div>
-				<div class="thumbnail" style="margin-top:8px;width:98%">
-					<img  class="preview" name="image_show" src="./img/strut-touch.png" width="256px" style="margin-top: 8px; margin-bottom: 8px;">
+				<div class="thumbnail" style="margin-top:8px;width:98%;">
+					<div style="height:200px;overflow:hidden">
+						<img  class="preview" name="image_show" src="./img/strut-touch.png" style="margin-top: 8px; margin-bottom: 8px;">
+					</div>
 				</div>
 				<div class="progress active progress-striped dispNone">
 	  				<div class="bar"></div>

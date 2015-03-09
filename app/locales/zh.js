@@ -53,6 +53,7 @@ define({
 	all_slides:"所有页",
 	select_slides:"当前选择页",
 	chooser_color:"选择颜色",
+	exit:"退出编辑器",
 
 	"bold":"粗体",
 	"italic":"斜体",

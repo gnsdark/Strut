@@ -228,7 +228,7 @@ border-bottom-color: #000;
 }
 
 .header .navbar-inner .nav:first-child {
-  margin-right: 5%;
+  margin-right: 0px;
 }
 
 @media only screen
@@ -240,3 +240,6 @@ and (max-device-width : 1024px)  {
 }
 
 
+.form-horizontal .control-group{
+  margin-bottom:10px;
+}

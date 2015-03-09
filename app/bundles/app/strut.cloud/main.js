@@ -1,4 +1,4 @@
-define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cloud/view/ErrorDialog","lang"],function (LoginDialog,UploadDialog,ErrorDialog,lang) {
+define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cloud/view/ErrorDialog",'tantaman/web/widgets/MenuItem',"lang"],function (LoginDialog,UploadDialog,ErrorDialog,MenuItem,lang) {
 	var md5 = (function() {
 		var hexcase = 0;
 		var b64pad = "";
@@ -325,6 +325,26 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 		});
 	}
 	var result =  {
+		initialize: function(registry) {
+			registry.register({
+				interfaces: 'strut.LogoMenuItemProvider'
+			},  {
+				createMenuItems: function(editorModel) {
+					var menuItems = [];
+					if(online){
+						menuItems.push({
+							$el: $('<li class="divider"></li>'),
+							render: function() { return this; }
+						});
+						menuItems.push(new MenuItem({title: lang.exit||"Exit", modal: null, handler: function(){
+							var loca = location;
+							loca.href=loca.href.substring(0,loca.href.indexOf('/Strut'));
+						}}));
+					}
+					return menuItems;
+				}
+			});
+		},
 		isOnline:function(){
 			return online;
 		},
@@ -375,7 +395,7 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 				_.ajax(e);
 			};
 			message();
-			templete = JST['strut.cloud/output']
+			templete = JST['strut.cloud/output'];
 		},
 		getToken:function(cb){
 			if(!online){
@@ -510,6 +530,54 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 						})
 					}
 				});
+			}
+		},
+		upload_img:function(file,prg,cb){
+			if(!online){
+				cb("cancel")
+				return login();
+			}
+			var upload = function(){
+				//文件流
+				var xhr = new XMLHttpRequest();
+				var fd = new FormData();
+				fd.append("file", file);
+				fd.append("token", token);
+
+				xhr.upload.addEventListener("progress", function(ev) {
+					if (ev.lengthComputable) {
+						var percentComplete = Math.round(ev.loaded * 100 / ev.total);
+						prg(percentComplete );
+					}
+				}, false);
+
+				xhr.addEventListener("load", function(ev) {
+					if (ev.target.status == 200) {
+						var result = JSON.parse(ev.target.responseText);
+						result.url = "http://cdn.laoshi910.com/" + result.hash;
+						cb(null,result);
+					} else {
+						cb("upload error");
+					}
+				}, false);
+
+				xhr.open("POST", "http://upload.qiniu.com");
+				xhr.send(fd);
+			}
+			if(!token){
+				result.getToken(function(err,t){
+					if(err){
+						return cb(err);
+					}
+					token = t;
+					setTimeout(function(){
+						token = null;
+					},100000);
+					upload();
+				});
+			}
+			else{
+				upload();
 			}
 		}
 	}

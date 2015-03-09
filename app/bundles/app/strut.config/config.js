@@ -2,12 +2,12 @@ define(function () {
 	var config = {
 		slide: {
 			size: {
-				width: 1024,
-				height: 768
+				width: 720,
+				height: 1280
 			},
 			overviewSize: {
-				width: 75,
-				height: 50
+				width: 72,
+				height: 128
 			}
 		}
 	};

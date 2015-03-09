@@ -1,9 +1,7 @@
-define(['libs/backbone', 'lang','libs/imgup'],
-	function(Backbone, lang,Imgup) {
+define(['libs/backbone', 'lang','strut/cloud/main'],
+	function(Backbone, lang,upimg) {
 		var modalCache = null;
 		var reg = /[a-z]+:/;
-		var imgup = new Imgup('847de02274cba30');
-
 		var ignoredVals = {
 			'http:': true,
 			'http://': true,
@@ -59,18 +57,21 @@ define(['libs/backbone', 'lang','libs/imgup'],
 
 				this._switchToProgress();
 				this.item.src = '';
-				imgup.upload(f).progress(function(ratio) {
+				upimg.upload_img(f,function(prg){
 					_this._updateProgress(ratio);
-				}).then(function(result) {
-					_this._switchToThumbnail();
-					_this.$input.val(result.data.link);
-					_this.urlChanged({
-						which: -1
-					});
-				}, function() {
-					_this._updateProgress(0);
-					_this._switchToThumbnail();
-					_this.$input.val('Failed to upload image to imgur');
+				},function(err,result){
+					if(err){
+						_this._updateProgress(0);
+						_this._switchToThumbnail();
+						_this.$input.val();
+					}
+					else{
+						_this._switchToThumbnail();
+						_this.$input.val(result.url);
+						_this.urlChanged({
+							which: -1
+						});
+					}
 				});
 			},
 			browseClicked: function() {
@@ -84,7 +85,7 @@ define(['libs/backbone', 'lang','libs/imgup'],
 			},
 			urlChanged: function(e) {
 				if (e.which === 13) {
-					this.src = this.$input.val();
+					this.src = this.$input.val() ||  "./img/strut-touch.png";;
 					return this.okClicked();
 				} else {
 					this.loadItem();
@@ -92,7 +93,7 @@ define(['libs/backbone', 'lang','libs/imgup'],
 			},
 			loadItem: function() {
 				var val = this.$input.val();
-				if(!val)return;
+				if(!val)return this.item.src = "./img/strut-touch.png";
 				if (val in ignoredVals)
 					return;
 
@@ -118,7 +119,7 @@ define(['libs/backbone', 'lang','libs/imgup'],
 				return this.$el.find(".alert").addClass("dispNone");
 			},
 			_updateProgress: function(ratio) {
-				this.$progressBar.css('width', ratio * 100 + '%');
+				this.$progressBar.css('width', ratio + '%');
 			},
 			_switchToProgress: function() {
 				this.$thumbnail.addClass('dispNone');
