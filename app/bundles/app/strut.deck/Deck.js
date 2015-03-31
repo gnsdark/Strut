@@ -122,6 +122,8 @@ define(["common/Calcium",
 				this.set("document_keywords",rawObj.document_keywords||"");
 				this.set("document_describe",rawObj.document_describe||"");
 				this.set("document_image",rawObj.document_image||"");
+				this.set("document_age",rawObj.document_age||null);
+				this.set("document_tag",rawObj.document_tag||null);
 				this.set("activeSlide", undefined);
 				this.set("background", rawObj.background);
 				this.set("fileName", rawObj.fileName);

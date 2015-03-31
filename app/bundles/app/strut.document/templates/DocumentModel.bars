@@ -8,6 +8,8 @@
 			<label class="col-xs-2 control-label" style="width:90px;text-align:left">{{document_title}}</label>
 			<div class="col-xs-10 controls" style="margin-left:100px">
 				<input name="title" type="text" class="form-control" placeholder="{{document_title_holder}}" style="width:98%">
+				<div name="age" style=" color: #777;margin-top: 4px; float: left; cursor: pointer; border: 1px solid #DDD; padding: 4px;">选择适应范围</div> 
+				<div name="tag" style=" color: #777;margin-left:4px;margin-top: 4px; float: left; cursor: pointer; border: 1px solid #DDD; padding: 4px;">选择分类标签</div> 
 			</div>
 		</div>
 		<div class="control-group">
@@ -34,14 +36,86 @@
 					</div>
 				</div>
 				<div class="progress active progress-striped dispNone">
-	  				<div class="bar"></div>
+						<div class="bar"></div>
 				</div>
 			</div>
 		</div>
 	</form>
+	<div name="select_age" style="display:none;position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-color: #FFF;">
+		<div style="margin: 8px;">
+			<h4>选择适用范围 <span style="margin-left: 10px;color: #969696;" name="select_show">选择结果:</span></h4>
+		</div>
+		<div style=" margin: 8px;">
+			<h5>孕前期</h5>
+			<div class="progress">
+				<div class="bar bar-success" style="width: 45%;transition-property:none;"></div>
+				<div class="bar bar-warning move" style="width: 10%;transition-property:none;" data-unit="周" data-split="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]" data-tag="1-">
+					<span data-target="lm" style="width: 20px; float: left; cursor: w-resize;">&lt;</span>
+					<span data-target="rm" style="width: 20px; float: right; cursor: e-resize;">&gt;</span>
+					<span data-target="mm" style="cursor: move;">~</span>
+				</div>
+				<div class="bar bar-info" style="width: 45%;transition-property:none;"></div>
+			</div>
+		</div>
+		<div style=" margin: 8px;">
+			<h5>孕后期</h5>
+			<div class="progress">
+				<div class="bar bar-success" style="width: 45%;transition-property:none;"></div>
+				<div class="bar bar-warning move" style="width: 10%;transition-property:none;" data-unit="周" data-split="[21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39]" data-tag="1+">
+					<span data-target="lm" style="width: 20px; float: left; cursor: w-resize;">&lt;</span>
+					<span data-target="rm" style="width: 20px; float: right; cursor: e-resize;">&gt;</span>
+					<span data-target="mm" style="cursor: move;">~</span>
+				</div>
+				<div class="bar bar-info" style="width: 45%;transition-property:none;"></div>
+			</div>
+		</div>
+		<div style=" margin: 8px;">
+			<h5>1岁以内</h5>
+			<div class="progress">
+				<div class="bar bar-success" style="width: 45%;transition-property:none;"></div>
+				<div class="bar bar-warning move" style="width: 10%;transition-property:none;" data-unit="月" data-split="[1,2,3,4,5,6,7,8,9,10,11,12]" data-tag="2-">
+					<span data-target="lm" style="width: 20px; float: left; cursor: w-resize;">&lt;</span>
+					<span data-target="rm" style="width: 20px; float: right; cursor: e-resize;">&gt;</span>
+					<span data-target="mm" style="cursor: move;">~</span>
+				</div>
+				<div class="bar bar-info" style="width: 45%;transition-property:none;"></div>
+			</div>
+		</div>
+		<div style=" margin: 8px;">
+			<h5>1岁~2岁</h5>
+			<div class="progress">
+				<div class="bar bar-success" style="width: 45%;transition-property:none;"></div>
+				<div class="bar bar-warning move" style="width: 10%;transition-property:none;" data-unit="月" data-split="[13,14,15,16,17,18,19,20,21,22,23,24]" data-tag="2-">
+					<span data-target="lm" style="width: 20px; float: left; cursor: w-resize;">&lt;</span>
+					<span data-target="rm" style="width: 20px; float: right; cursor: e-resize;">&gt;</span>
+					<span data-target="mm" style="cursor: move;">~</span>
+				</div>
+				<div class="bar bar-info" style="width: 45%;transition-property:none;"></div>
+			</div>
+		</div>
+		<div style=" margin: 8px;">
+			<h5>2岁以上</h5>
+			<div class="progress">
+				<div class="bar bar-success" style="width: 45%;transition-property:none;"></div>
+				<div class="bar bar-warning move" style="width: 10%;transition-property:none;" data-unit="岁" data-split="[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]" data-tag="2+">
+					<span data-target="lm" style="width: 20px; float: left; cursor: w-resize;">&lt;</span>
+					<span data-target="rm" style="width: 20px; float: right; cursor: e-resize;">&gt;</span>
+					<span data-target="mm" style="cursor: move;">~</span>
+				</div>
+				<div class="bar bar-info" style="width: 45%;transition-property:none;"></div>
+			</div>
+		</div>
+	</div>
+
+	<div name="select_type"  style="display:none;position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-color: #FFF;overflow-y:auto">
+		<div style="position: fixed;width: 960px;z-index: 999;background-color: #575757;color: #FFF;">
+			<h4 style="margin-left: 16px;">选择分类标签 <span style="margin-left: 10px;color: #C3C3C3;font-size: 12pt;" name="select_show">选择结果:</span></h4>
+		</div>
+		<div class="content" style="margin-top:46px"></div>
+	</div>
 	<div class="alert alert-error dispNone">
-  		<button class="close" data-dismiss="alert">×</button>
-  		{{modal_url_error}}
+			<button class="close" data-dismiss="alert">×</button>
+			{{modal_url_error}}
 	</div>
 </div>
 <div class="modal-footer">

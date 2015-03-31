@@ -438,6 +438,26 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 				})
 			}
 		},
+		getDocumentType:function(cb){
+			if(!online){
+				login();
+			}
+			else{
+				ajax({
+					url: "mtypes",
+					data: {
+						tag:Date.now()
+					},
+					success:function(r){
+						if (r.status) {
+							cb(lang.error&&lang.error[r.status]||"读取源数据失败！");
+						} else {
+							cb(null,r.types);
+						}
+					}
+				})
+			}
+		},
 		//pcode
 		publish:function(pub,model,generator){
 			if(!online){
@@ -505,6 +525,11 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 						}
 					},
 					success:function(post,cb){
+						var tag = JSON.parse(doc.get("document_tag") ||"{}");
+						var tags = [];
+						for(var k in tag){
+							tags.push(k);
+						}
 						//对话框上传
 						ajax({
 							url: "mrecord",
@@ -517,7 +542,9 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 									smallico:doc.get("document_image")||pub.pubicon||"",
 									title:doc.get("document_title"),
 									text:doc.get("document_describe"),
-									key:doc.get("document_keywords")
+									key:doc.get("document_keywords"),
+									age:doc.get("document_age") || null,
+									tags:tags
 								}
 							},
 							success:function(r){

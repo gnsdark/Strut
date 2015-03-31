@@ -10,10 +10,14 @@ define(['libs/backbone', 'lang'],
 			},
 			initialize: function() {
 				this._template = JST['strut.cloud/LoginDialog'];
+				this.$el.css("z-index",9999);
 			},
 			show: function(cb) {
+
 				this.cb = cb || null;
-				return this.$el.modal('show');
+				var result = this.$el.modal('show');
+				this.$el.data("modal").$backdrop.css("z-index",9998);
+				return result;
 			},
 			okClicked: function() {
 				this.cb && this.cb();

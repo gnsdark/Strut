@@ -233,6 +233,102 @@ require([
 			}
 		};
 
+		var isMouseDown = false;
+		var minElement,maxElement,moveElement,maxWidth;
+		// callback holders
+		var dragCallbacks = {};
+		// global position records
+		var lastMouseX;
+		var lastMouseY;
+		// returns the mouse (cursor) current position
+		$.getMousePosition = function(e) {
+				var posx = 0;
+				var posy = 0;
+				if (!e) var e = window.event;
+				if (e.pageX || e.pageY) {
+					posx = e.pageX;
+					posy = e.pageY;
+				} else if (e.clientX || e.clientY) {
+					posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+					posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+				}
+				return {
+					'x': posx,
+					'y': posy
+				};
+			}
+		$.updatePosition = function(e) {
+				var pos = $.getMousePosition(e);
+				var spanX = (pos.x - lastMouseX);
+				var spanY = (pos.y - lastMouseY);
+				return {
+					"x":spanX,
+					"y":spanY
+				};
+			}
+		$(document).mousemove(function(e) {
+			if (isMouseDown) {
+				if (dragCallbacks[moveElement[0].id] != undefined) {
+					dragCallbacks[moveElement[0].id](moveElement,minElement,maxElement,maxWidth,movetype,$.updatePosition(e));
+				}
+				return false;
+			}
+		});
+		$(document).mouseup(function(e) {
+			if (isMouseDown) {
+				isMouseDown = false;
+				return false;
+			}
+		});
+		var _ids = 1;
+		var ids = function(){
+			return _ids++;
+		}
+		var movetype = 0;//-1 left 1 right 0 move
+		$.fn.easymove = function(callback) {
+			return this.each(function() {
+				// if no id is defined assign a unique one
+				if (!this.id) this.id = 'easydrag' + ids();
+				dragCallbacks[this.id] = callback;
+				$(this).mousedown(function(e) {
+					var target = $(e.target);
+					var mo = target.attr("data-target");
+					if(mo == "lm"){
+						movetype = -1;
+					}
+					else if(mo == "rm"){
+						movetype = 1;
+					}
+					else{
+						movetype = 0;
+					}
+					isMouseDown = true;
+					moveElement = $(this);
+					minElement = moveElement.prev();
+					minElement.data("start",{
+						width:minElement.width(),
+						height:minElement.height()
+					});
+
+					maxElement = moveElement.next();
+					maxElement.data("start",{
+						width:maxElement.width(),
+						height:maxElement.height()
+					});
+					moveElement.data("start",{
+						width:moveElement.width(),
+						height:moveElement.height(),
+						data:JSON.parse(moveElement.attr("data-split")),
+						unit:moveElement.attr("data-unit")
+					});
+					maxWidth = moveElement.parent().width();
+					var pos = $.getMousePosition(e);
+					lastMouseX = pos.x;
+					lastMouseY = pos.y;
+					$.updatePosition(e);
+				});
+			});
+		}
 		StrutLoader.start(registry, function() {}, function() {});
 
 		$(window).unload(function() {

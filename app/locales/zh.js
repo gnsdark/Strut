@@ -95,7 +95,7 @@ define({
 	"localstorage":"本地存储",
 
 	"login_title":"登录910发布平台",
-	"login_info":"发布内容需要登录910发布平台，现在就去登录吗？",
+	"login_info":"当前操作需要登录910发布平台，现在就去登录吗？",
 
 	error_title:"提示",
 	error:{
