@@ -35,6 +35,7 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 			},
 			select_type:function(){
 				var result = this.$tag.data("value");
+				var _this = this;
 				upimg.getDocumentType(function(err,types){
 					if(err){
 						return;
@@ -51,11 +52,11 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 							}
 						}
 					}
-					this.$select_type.find(".content").html(this._templateType({
+					_this.$select_type.find(".content").html(this._templateType({
 						types:types
 					}));
-					this.$select_type.css("display","block");
-					this._status = "select_type";
+					_this.$select_type.css("display","block");
+					_this._status = "select_type";
 				});
 			},
 			select_age_change:function(el,min,max,width,type,point){
