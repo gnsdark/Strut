@@ -232,6 +232,7 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'empty.html',
                         'preview_export/**',
+                        'img/**',
                         'zip/**'
                     ]
                 },
