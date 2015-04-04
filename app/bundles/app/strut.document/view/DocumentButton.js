@@ -52,7 +52,7 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 							}
 						}
 					}
-					_this.$select_type.find(".content").html(this._templateType({
+					_this.$select_type.find(".content").html(_this._templateType({
 						types:types
 					}));
 					_this.$select_type.css("display","block");
