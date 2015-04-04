@@ -354,7 +354,7 @@ define(["strut/cloud/view/LoginDialog","strut/cloud/view/UploadDialog","strut/cl
 			if(loca.host.indexOf("127.0.0.1") > -1 || loca.host.indexOf("localhost") > -1)
 				srv = loca.href.substring(0,loca.href.indexOf('/Strut'))  + "/";
 			else
-				srv = "http://publishi.laoshi910.com/";
+				srv = "http://publish.laoshi910.com/";
 			auth = {
 				key: session.getItem('userkey'),
 				sign: session.getItem('usersign'),
