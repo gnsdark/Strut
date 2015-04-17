@@ -114,41 +114,45 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 					var str = eld.data[startPos] +  eld.unit + "-" +  eld.data[stopPos] + eld.unit;
 					el.find('[data-target="mm"]').html(str);
 					this.$select_age.find("[name='select_show']").html(str);
-					var t = el.attr("data-tag");
-					var num = t[0],tmp;
+					var num = el.attr("data-tag"),tmp,tmps;
 					if(num == "1"){
 						if(eld.data[stopPos] != eld.data[startPos]){
-							tmp = "0000" + eld.data[stopPos];
-							num += tmp.substr(tmp.length-4);
-						}
-						else{
-							num += "0000";
-						}
-						tmp = "0000" + eld.data[startPos];
-						num += tmp.substr(tmp.length-4);
-					}
-					else if (num == "2"){
-						tmp = eld.data[stopPos];
-						if(tmp != eld.data[startPos]){
-							if(t[1] == "-"){
-								if(Number(tmp)  >= 12){
-									num += '01';
-									tmp = Number(tmp) - 12;
-								}
-								else{
-									num += '00';
-								}
-								num += (tmp < 10?'0':'') + tmp;
+							//max +
+							if(eld.data[stopPos] == "39"){
+								tmp = "0000" + eld.data[startPos];
+								num += tmp.substr(tmp.length-4) + "0000";
 							}
 							else{
-								num += (tmp < 10?'0':'') + tmp + '00';
+								//range
+								tmp = "0000" + eld.data[stopPos];
+								num += tmp.substr(tmp.length-4);
+								tmp = "0000" + eld.data[startPos];
+								num += tmp.substr(tmp.length-4);
 							}
 						}
 						else{
-							num += "0000";
+							//self
+							tmp = "0000" + eld.data[startPos];
+							tmp = tmp.substr(tmp.length-4);
+							num +=  tmp + tmp;
 						}
-						tmp = eld.data[startPos];
-						if(t[1] == "-"){
+					}
+					else if (num != "1"){
+						tmp = eld.data[stopPos];
+						tmps = eld.data[startPos];
+						//age 2-
+						if(num == "2"){
+							//range
+							if(Number(tmp)  >= 12){
+								num += '01';
+								tmp = Number(tmp) - 12;
+							}
+							else{
+								num += '00';
+							}
+							num += (tmp < 10?'0':'') + tmp;
+
+							tmp = eld.data[startPos];
 							if(Number(tmp)  >= 12){
 								num += '01';
 								tmp = Number(tmp) - 12;
@@ -158,8 +162,28 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 							}
 							num += (tmp < 10?'0':'') + tmp;
 						}
+						//age 2+
 						else{
-							num += (tmp < 10?'0':'') + tmp + '00';
+							if(tmp != tmps){
+								//18 +
+								if(tmp == "18"){
+									num += (Number(tmps) < 10?'0':'') + tmps + '000000';
+								}
+								//range
+								else{
+									num += (Number(tmp) < 10?'0':'') + tmp + '00';
+									num += (Number(tmps) < 10?'0':'') + tmps + '00';
+								}
+							}
+							else{
+								tmp = (Number(tmp) < 10?'0':'') + tmp + "00";
+								if(tmps == "18"){
+									num += tmp + "0000";
+								}
+								else{
+									num +=  tmp + tmp;
+								}
+							}
 						}
 					}
 					this.$select_age.data("result",num);
@@ -208,7 +232,7 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 				return this.$el.modal('show');
 			},
 			refresh:function(){
-				var age = Number(this.$age.data("value")),from,to,from_y,to_y;
+				var age = Number(this.$age.data("value")),from,to,from_y,to_y,tmp;
 				if(!age){
 					this.$age.html("选择适应范围");
 				}
@@ -217,6 +241,10 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 						//孕周
 						to = Math.floor(age/10000) - 10000;
 						from = age%10000;
+						if(from === 0){
+							from = to;
+							to = 0;
+						}
 						this.$age.html(from + "周 ~ " + (to && (to + "周") || "+" ));
 					}
 					else if (age < 300000000){
@@ -227,16 +255,37 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 						from = age%10000;
 						from_y = Math.floor(from/100);
 						from = from % 100;
-						if(from_y < 2){
-							from += from_y * 12;
-							to += to_y * 12;
-							to = to > from ?to:0;
-							this.$age.html(from + "个月 ~ " + (to && (to + "个月") || "+" ));
+						from += from_y * 12;
+						to += to_y * 12;
+						to = to >= from ?to:0;
+						this.$age.html(from + "个月 ~ " + (to && (to + "个月") || "+" ));
+					}
+					else if (age < 400000000){
+						to = Math.floor(age/10000) - 30000;
+						to_y = Math.floor(to / 100);
+						to = to % 100;
+						from = age%10000;
+						from_y = Math.floor(from/100);
+						if(from === 0){
+							from = to;
+							from_y = to_y;
+							to = 0;
+							to_y = 0;
 						}
 						else{
-							var tostr = (to + to_y * 12) > (from + from_y * 12)?(to_y  + "岁" + (to && (to  +  "个月 ")||"")):"+";_
-							this.$age.html(from_y  + "岁" + (from && (from  +  "个月 ")||"") +  " ~ " + tostr);	
+							from = from % 100;
 						}
+						var cmp = (to + to_y * 12) - (from + from_y * 12),tostr;
+						if(cmp > 0){
+							tostr = " ~ " + to_y  + "岁" + (to && (to  +  "个月 ")||"");
+						}
+						else if (cmp < 0){
+							tostr = "+";
+						}
+						else{
+							tostr = "";
+						}
+						this.$age.html(from_y  + "岁" + (from && (from  +  "个月 ")||"") +  tostr);
 					}
 				}
 				var tags = this.$tag.data("value");
@@ -319,7 +368,7 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 				else if(this._status == "select_type"){
 					this.$select_type.css("display","none");
 				}
-				if (this.$input != null) {
+				if (this.$input) {
 					this.item.src = '';
 					return this.$input.val("");
 				}
@@ -327,7 +376,7 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 			},
 			urlChanged: function(e) {
 				if (e.which === 13) {
-					this.src = this.$input.val() ||  "./img/strut-touch.png";;
+					this.src = this.$input.val() ||  "./img/strut-touch.png";
 					return this.okClicked();
 				} else {
 					this.loadItem();
@@ -335,17 +384,21 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 			},
 			loadItem: function() {
 				var val = this.$input.val();
-				if(!val)return this.item.src = "./img/strut-touch.png";
+				if(!val){
+					this.item.src = "./img/strut-touch.png";
+					return;
+				}
 				if (val in ignoredVals)
 					return;
 
 				var r = reg.exec(val);
-				if (r == null || r.index != 0) {
+				if (!r || r.index !== 0) {
 					val = 'http://' + val;
 				}
 
 				this.item.src = val;
-				return this.src = this.item.src;
+				this.src = this.item.src;
+				return;
 			},
 			_itemLoadError: function() {
 				if(!this.$input.val()){
@@ -374,17 +427,17 @@ define(['libs/backbone', 'lang','strut/cloud/main'],
 			render: function() {
 				var _this = this;
 				var opt={
-					title:lang["document_header"]||"docment",
-					document_title:lang["document_title"]||"Title",
-					document_title_holder:lang["document_title_holder"]||"Please input title",
-					document_keywords:lang["document_keywords"]||"Keywords",
-					document_keywords_holder:lang["document_keywords_holder"]||"Please input keywords",
-					document_describe:lang["document_describe"]||"Description",
-					document_describe_holder:lang["document_describe_holder"]||"Please input description",
-					document_image:lang["document_image"]||"Image",
-					submit:lang["submit"]||"Save",
-					modal_url_error:lang["modal_url_error"]||"The image URL you entered appears to be incorrect",
-					modal_browser:lang["modal_browser"]||"Browse"
+					title:lang.document_header||"docment",
+					document_title:lang.document_title||"Title",
+					document_title_holder:lang.document_title_holder||"Please input title",
+					document_keywords:lang.document_keywords||"Keywords",
+					document_keywords_holder:lang.document_keywords_holder||"Please input keywords",
+					document_describe:lang.document_describe||"Description",
+					document_describe_holder:lang.document_describe_holder||"Please input description",
+					document_image:lang.document_image||"Image",
+					submit:lang.submit||"Save",
+					modal_url_error:lang.modal_url_error||"The image URL you entered appears to be incorrect",
+					modal_browser:lang.modal_browser||"Browse"
 				};
 				this.$el.html(this._template(opt));
 				this.$el.modal();
